@@ -105,10 +105,18 @@ now we can apply the loadgraph function by the master machine <br>
 this function takes the affected sub-file and after that using the "EXTERNALV2" command that compute the frontier vertices<br>
 3 EXTERNALV2 <br>
 4 LOCALSCAN  this command compute the local clustering <br>
-5 MERGE      Here we combine the local results
+5 MERGE      Here we combine the local results <br>
+So here we have compute the initial graph clustering and the clustering file is generated to show the actual clustering, and now can add/delete edge or node using the newt function ADDEDGE,ADDNEWEDGE, DELETEVERTEX, DELETEVERTEX, DELETEEDGE, where:<br>
+1 ADDEDGE:file         file contains couples of exiting nodes in the inital graph <br>
+2 ADDNEWEDGE:file         file contains couples of exiting nodes and new nodes (this function used to add new vertices)<br>
+3 DELETEVERTEX:file         file contains list of vertices to be deleted <br>
+4 DELETEEDGE:file         file contains list of edges to be deleted <br>
 
+After a batch of update, we can get the new clusering schema using the UPDATE commande<br>
 
+6 UPDATE <br>
 
+If we need to show the final result we can use the PRINT command
 
 
 
