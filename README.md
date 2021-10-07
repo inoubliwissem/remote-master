@@ -66,3 +66,51 @@ Verify that can connect to machine without password
 ```{r, engine='bash', count_lines}
 ssh slave1
 ```
+### At each machine download and build the jar file
+```{r, engine='bash', count_lines}
+git clone https://github.com/inoubliwissem/remote-master.git
+cd remote-master
+mvn package
+```
+
+### Start master service in the master machine and worker service in the slave machines
+```{r, engine='bash', count_lines}
+java -cp DISCAN.jar BLADYG.standalone p1 id nb machines
+```
+where:
+- DISCAN.jar the jar file
+- BLADYG.standalone the main class
+- p1 type of service (master or worker) p1 should be m or w
+- id machine id
+- nb number of worker
+- machines text file contains all used machines
+
+the structure of the machine file is like the next structure:<br>
+master 0 10.0.1.20<br>
+worker 1 10.0.1.35 <br>
+worker 2 10.0.1.34 <br>
+worker 3 10.0.1.38 <br>
+worker 4 10.0.1.32 <br>
+worker 5 10.0.1.31 <br>
+worker 6 10.0.1.36 <br>
+worker 7 10.0.1.37 <br>
+worker 8 10.0.1.33 <br>
+worker 9 10.0.1.40 <br>
+### Use the DISCAN algorithm
+At this step, the framework is ready to perform your request and to verify that all workers are available tape the next commande in the terminal<br> 
+1 MEMBRES <br>
+When all workers are available, we can use the cluster, so we start by dividing our graph file into sub-file using splitGraph.sh under the resource folder, the splitGraph script takes the name of the graph and number of partitions, example /splitGraph.sh dblp.txt 10 <br> after we assent each sub-file to worker machine.<br>
+now we can apply the loadgraph function by the master machine <br>
+2 LOADGraph <br>
+this function takes the affected sub-file and after that using the "EXTERNALV2" command that compute the frontier vertices<br>
+3 EXTERNALV2 <br>
+4 LOCALSCAN  this command compute the local clustering <br>
+5 MERGE      Here we combine the local results
+
+
+
+
+
+
+
+
